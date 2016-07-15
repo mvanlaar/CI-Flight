@@ -447,26 +447,29 @@ namespace CI_FLights2014
                         }
                         else
                         {
-                            CIFLights.Add(new CIFLight
-                            {
-                                FromIATA = TEMP_FromIATA,
-                                ToIATA = TEMP_ToIATA,
-                                FromDate = Route_Start,
-                                ToDate = Route_Einde,
-                                ArrivalTime = DateTime.Parse(Route_Arrival_Time),
-                                DepartTime = DateTime.Parse(Route_Depart_Time),
-                                FlightAircraft = Route_Equipment,
-                                FlightAirline = TEMP_Airline,
-                                FlightMonday = Route_Day_Monday_Bit,
-                                FlightTuesday = Route_Day_Thuesday_Bit,
-                                FlightWednesday = Route_Day_Wednesday_Bit,
-                                FlightThursday = Route_Day_Thursday_Bit,
-                                FlightFriday = Route_Day_Friday_Bit,
-                                FlightSaterday = Route_Day_Saterday_Bit,
-                                FlightSunday = Route_Day_Sunday_Bit,
-                                FlightNumber = Airline_FlightNumber,
-                                FlightOperator = Airline_Name
-                            });
+                            if (TEMP_Airline != "AV") {
+                                // Not Avianca, we got a better source for Avianca.
+                                CIFLights.Add(new CIFLight
+                                {
+                                    FromIATA = TEMP_FromIATA,
+                                    ToIATA = TEMP_ToIATA,
+                                    FromDate = Route_Start,
+                                    ToDate = Route_Einde,
+                                    ArrivalTime = DateTime.Parse(Route_Arrival_Time),
+                                    DepartTime = DateTime.Parse(Route_Depart_Time),
+                                    FlightAircraft = Route_Equipment,
+                                    FlightAirline = TEMP_Airline,
+                                    FlightMonday = Route_Day_Monday_Bit,
+                                    FlightTuesday = Route_Day_Thuesday_Bit,
+                                    FlightWednesday = Route_Day_Wednesday_Bit,
+                                    FlightThursday = Route_Day_Thursday_Bit,
+                                    FlightFriday = Route_Day_Friday_Bit,
+                                    FlightSaterday = Route_Day_Saterday_Bit,
+                                    FlightSunday = Route_Day_Sunday_Bit,
+                                    FlightNumber = Airline_FlightNumber,
+                                    FlightOperator = Airline_Name
+                                });
+                            }
                         }
                     }
                 }
@@ -627,7 +630,7 @@ namespace CI_FLights2014
                                     csvtrips.WriteField(CIFLights[i].FromIATA + CIFLights[i].ToIATA + CIFLights[i].FlightAirline + CIFLights[i].FlightNumber.Replace(" ", "") + String.Format("{0:yyyyMMdd}", CIFLights[i].FromDate) + String.Format("{0:yyyyMMdd}", CIFLights[i].ToDate) + Convert.ToInt32(CIFLights[i].FlightMonday) + Convert.ToInt32(CIFLights[i].FlightTuesday) + Convert.ToInt32(CIFLights[i].FlightWednesday) + Convert.ToInt32(CIFLights[i].FlightThursday) + Convert.ToInt32(CIFLights[i].FlightFriday) + Convert.ToInt32(CIFLights[i].FlightSaterday) + Convert.ToInt32(CIFLights[i].FlightSunday));
                                     csvtrips.WriteField(CIFLights[i].FromIATA + CIFLights[i].ToIATA + CIFLights[i].FlightAirline + CIFLights[i].FlightNumber.Replace(" ", "") + String.Format("{0:yyyyMMdd}", CIFLights[i].FromDate) + String.Format("{0:yyyyMMdd}", CIFLights[i].ToDate) + Convert.ToInt32(CIFLights[i].FlightMonday) + Convert.ToInt32(CIFLights[i].FlightTuesday) + Convert.ToInt32(CIFLights[i].FlightWednesday) + Convert.ToInt32(CIFLights[i].FlightThursday) + Convert.ToInt32(CIFLights[i].FlightFriday) + Convert.ToInt32(CIFLights[i].FlightSaterday) + Convert.ToInt32(CIFLights[i].FlightSunday));
                                     csvtrips.WriteField(CIFLights[i].ToIATA);
-                                    csvtrips.WriteField("");
+                                    csvtrips.WriteField(CIFLights[i].FlightNumber);
                                     csvtrips.WriteField("");
                                     csvtrips.WriteField("");
                                     csvtrips.WriteField("");
@@ -648,7 +651,7 @@ namespace CI_FLights2014
                                     csvstoptimes.WriteField("");
                                     csvstoptimes.NextRecord();
                                     // Arrival Record
-                                    if(CIFLights[i].DepartTime.TimeOfDay < System.TimeSpan.Parse("00:09:00") && CIFLights[i].ArrivalTime.TimeOfDay > System.TimeSpan.Parse("00:09:00"))
+                                    if(CIFLights[i].DepartTime.TimeOfDay < System.TimeSpan.Parse("23:59:59") && CIFLights[i].ArrivalTime.TimeOfDay > System.TimeSpan.Parse("00:00:00"))
                                     //if (!CIFLights[i].FlightNextDayArrival)
                                     {
                                         csvstoptimes.WriteField(CIFLights[i].FromIATA + CIFLights[i].ToIATA + CIFLights[i].FlightAirline + CIFLights[i].FlightNumber.Replace(" ", "") + String.Format("{0:yyyyMMdd}", CIFLights[i].FromDate) + String.Format("{0:yyyyMMdd}", CIFLights[i].ToDate) + Convert.ToInt32(CIFLights[i].FlightMonday) + Convert.ToInt32(CIFLights[i].FlightTuesday) + Convert.ToInt32(CIFLights[i].FlightWednesday) + Convert.ToInt32(CIFLights[i].FlightThursday) + Convert.ToInt32(CIFLights[i].FlightFriday) + Convert.ToInt32(CIFLights[i].FlightSaterday) + Convert.ToInt32(CIFLights[i].FlightSunday));
