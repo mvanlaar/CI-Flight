@@ -239,7 +239,8 @@ namespace CI_FLights2014
             Console.WriteLine("Reading IATA Airports....");
             string IATAAirportsFile = AppDomain.CurrentDomain.BaseDirectory + "IATAAirports.json";
             JArray o1 = JArray.Parse(File.ReadAllText(IATAAirportsFile));
-            IList<IATAAirport> IATAAirports = o1.ToObject<IList<IATAAirport>>();            
+            IList<IATAAirport> TempIATAAirports = o1.ToObject<IList<IATAAirport>>();
+            var IATAAirports = TempIATAAirports as List<IATAAirport>;
 
             List<CIFLight> CIFLights = new List<CIFLight> { };
             Uri address = new Uri(ConfigurationManager.AppSettings.Get("Download-Url"));
@@ -592,10 +593,10 @@ namespace CI_FLights2014
 
                                 for (int i = 0; i < agencyairportsiata.Count; i++) // Loop through List with for)
                                 {
-                                    var myModelasList = IATAAirports as List<IATAAirport>;
+                                    
 
                                     //int result1 = IATAAirports.FindIndex(T => T.stop_id == 9458)
-                                    var airportinfo = myModelasList.Find(q => q.stop_id == agencyairportsiata[i]);
+                                    var airportinfo = IATAAirports.Find(q => q.stop_id == agencyairportsiata[i]);
                                     csvstops.WriteField(airportinfo.stop_id);
                                     csvstops.WriteField(airportinfo.stop_name);
                                     csvstops.WriteField(airportinfo.stop_desc);
@@ -701,12 +702,14 @@ namespace CI_FLights2014
 
                                         //var item4 = _Airlines.Find(q => q.Name == flight.FlightAirline);
                                         //string TEMP_IATA = item4.IATA;
+                                        var FromAirportInfo = IATAAirports.Find(q => q.stop_id == flight.FromIATA);
+                                        var ToAirportInfo = IATAAirports.Find(q => q.stop_id == flight.ToIATA);
 
                                         csvtrips.WriteField(flight.FromIATA + flight.ToIATA);
                                         csvtrips.WriteField(flight.FromIATA + flight.ToIATA + flight.FlightAirline + flight.FlightNumber.Replace(" ", "") + String.Format("{0:yyyyMMdd}", flight.FromDate) + String.Format("{0:yyyyMMdd}", flight.ToDate) + Convert.ToInt32(flight.FlightMonday) + Convert.ToInt32(flight.FlightTuesday) + Convert.ToInt32(flight.FlightWednesday) + Convert.ToInt32(flight.FlightThursday) + Convert.ToInt32(flight.FlightFriday) + Convert.ToInt32(flight.FlightSaterday) + Convert.ToInt32(flight.FlightSunday));
                                         csvtrips.WriteField(flight.FromIATA + flight.ToIATA + flight.FlightAirline + flight.FlightNumber.Replace(" ", "") + String.Format("{0:yyyyMMdd}", flight.FromDate) + String.Format("{0:yyyyMMdd}", flight.ToDate) + Convert.ToInt32(flight.FlightMonday) + Convert.ToInt32(flight.FlightTuesday) + Convert.ToInt32(flight.FlightWednesday) + Convert.ToInt32(flight.FlightThursday) + Convert.ToInt32(flight.FlightFriday) + Convert.ToInt32(flight.FlightSaterday) + Convert.ToInt32(flight.FlightSunday));
-                                        csvtrips.WriteField(flight.ToIATA);
-                                        csvtrips.WriteField(flight.FlightNumber);
+                                        csvtrips.WriteField(ToAirportInfo.stop_name);
+                                        csvtrips.WriteField(flight.FlightNumber + " " + ToAirportInfo.stop_name);
                                         csvtrips.WriteField("");
                                         csvtrips.WriteField("");
                                         csvtrips.WriteField("");
@@ -750,9 +753,6 @@ namespace CI_FLights2014
                                             int minute = flight.ArrivalTime.Minute;
                                             string strminute = minute.ToString();
                                             if (strminute.Length == 1) { strminute = "0" + strminute; }
-
-
-
                                             csvstoptimes.WriteField(flight.FromIATA + flight.ToIATA + flight.FlightAirline + flight.FlightNumber.Replace(" ", "") + String.Format("{0:yyyyMMdd}", flight.FromDate) + String.Format("{0:yyyyMMdd}", flight.ToDate) + Convert.ToInt32(flight.FlightMonday) + Convert.ToInt32(flight.FlightTuesday) + Convert.ToInt32(flight.FlightWednesday) + Convert.ToInt32(flight.FlightThursday) + Convert.ToInt32(flight.FlightFriday) + Convert.ToInt32(flight.FlightSaterday) + Convert.ToInt32(flight.FlightSunday));
                                             csvstoptimes.WriteField(hour + ":" + strminute + ":00");
                                             csvstoptimes.WriteField(hour + ":" + strminute + ":00");
