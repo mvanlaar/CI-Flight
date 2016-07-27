@@ -13340,6 +13340,37 @@
    "stop_timezone": "America/Bogota"
  },
  {
+   "stop_name": "La Macarena Airport",
+   "stop_city": "La Macarena",
+   "stop_country": "Colombia",
+   "stop_iata": "LMC",
+   "stop_icao": "SKNA",
+   "stop_lat": 2.179167,
+   "stop_lon": -73.7875,
+   "stop_timezone": "America/Bogota"
+ },
+ {  
+   "stop_name": "Contador Airport",
+   "stop_city": "Pitalito",
+   "stop_country": "Colombia",   
+   "stop_iata": "PTX",
+   "stop_icao": "SKPI",
+   "stop_lat": 1.857222,
+   "stop_lon": -76.085556,
+   "stop_timezone": "America/Bogota"  
+ },
+ {
+   
+   "stop_name": "Tibú Airport",
+   "stop_city": "Tibú",
+   "stop_country": "Colombia",  
+   "stop_iata": "TIB",
+   "stop_icao": "SKTB",
+   "stop_lat": 8.630833,
+   "stop_lon": -72.730833,
+   "stop_timezone": "America/Bogota"
+ }, 
+ {
    "stop_name": "La Mina Airport",
    "stop_city": "Albania",
    "stop_country": "Colombia",
