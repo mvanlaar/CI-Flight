@@ -24,7 +24,11 @@ namespace CI_FLights2014
             // Auto-implemented properties. 
 
             public string FromIATA;
+            public string FromICAO;
             public string ToIATA;
+            public string ToICAO;
+            public Boolean FromUseICAO;
+            public Boolean ToUseICAO;
             public DateTime FromDate;
             public DateTime ToDate;
             public Boolean FlightMonday;
@@ -44,20 +48,23 @@ namespace CI_FLights2014
 
         public class IATAAirport
         {
-            public string stop_id;
+            public string stop_iata;
+            public string stop_icao;
             public string stop_name;
-            public string stop_desc;
+            public string stop_city;
+            public string stop_country;
             public string stop_lat;
             public string stop_lon;
-            public string zone_id;
-            public string stop_url;
+            public string stop_timezone;
         }
 
         public class AirportDef 
          { 
              // Auto-implemented properties.  
              public string Name { get; set; } 
-             public string IATA { get; set; } 
+             public string IATA { get; set; }
+             public string ICAO { get; set; }
+             public Boolean UseICAO { get; set; }
          }
 
         public class AirlinesDef
@@ -117,118 +124,118 @@ namespace CI_FLights2014
 
         static List<AirportDef> _Airports = new List<AirportDef> 
         { 
-            new AirportDef { Name = "ALDANA", IATA="IPI" }, 
-            new AirportDef { Name = "ARARACUARA", IATA="AQA" }, 
-            new AirportDef { Name = "ARAUCA - MUNICIPIO", IATA="AUC" }, 
-            new AirportDef { Name = "ARMENIA", IATA="AXM" }, 
-            new AirportDef { Name = "ARUBA", IATA="AUA" }, 
-            new AirportDef { Name = "ATLANTA", IATA="ATL" }, 
-            new AirportDef { Name = "BAHIA SOLANO", IATA="BSC" }, 
-            new AirportDef { Name = "BARCELONA", IATA="BCN" }, 
-            new AirportDef { Name = "BARRANCABERMEJA", IATA="EJA" }, 
-            new AirportDef { Name = "BARRANQUILLA", IATA="BAQ" }, 
-            new AirportDef { Name = "BOGOTA", IATA="BOG" }, 
-            new AirportDef { Name = "BUCARAMANGA", IATA="BGA" }, 
-            new AirportDef { Name = "BUENOS AIRES", IATA="EZE" }, 
-            new AirportDef { Name = "CALI", IATA="CLO" }, 
-            new AirportDef { Name = "CANCUN", IATA="CUN" }, 
-            new AirportDef { Name = "CARACAS", IATA="CCS" }, 
-            new AirportDef { Name = "CAREPA", IATA="APO" }, 
-            new AirportDef { Name = "CARTAGENA", IATA="CTG" }, 
-            new AirportDef { Name = "COROZAL", IATA="CZU" }, 
-            new AirportDef { Name = "CUCUTA", IATA="CUC" }, 
-            new AirportDef { Name = "CURACAO", IATA="CUR" }, 
-            new AirportDef { Name = "EL YOPAL", IATA="EYP" }, 
-            new AirportDef { Name = "ESMERALDAS", IATA="ESM" }, 
-            new AirportDef { Name = "FLORENCIA", IATA="FLA" }, 
-            new AirportDef { Name = "FORT LAUDERDALE", IATA="FLL" }, 
-            new AirportDef { Name = "GUAPI", IATA="GPI" }, 
-            new AirportDef { Name = "GUATEMALA", IATA="GUA" }, 
-            new AirportDef { Name = "GUAYAQUIL", IATA="GYE" }, 
-            new AirportDef { Name = "HABANA", IATA="HAV" }, 
-            new AirportDef { Name = "HOUSTON", IATA="HOU" }, 
-            new AirportDef { Name = "IBAGUE", IATA="IBE" }, 
-            new AirportDef { Name = "LETICIA", IATA="LET" }, 
-            new AirportDef { Name = "LIMA", IATA="LIM" }, 
-            new AirportDef { Name = "MADRID", IATA="MAD" }, 
-            new AirportDef { Name = "MAICAO", IATA="MCJ" }, 
-            new AirportDef { Name = "MANIZALES", IATA="MZL" }, 
-            new AirportDef { Name = "MEDELLIN", IATA="EOH" }, 
-            new AirportDef { Name = "MEXICO", IATA="MEX" }, 
-            new AirportDef { Name = "MIAMI", IATA="MIA" }, 
-            new AirportDef { Name = "MITU", IATA="MVP" }, 
-            new AirportDef { Name = "MONTERIA", IATA="MTR" }, 
-            new AirportDef { Name = "NEIVA", IATA="NVA" }, 
-            new AirportDef { Name = "NEW YORK", IATA="JFK" }, 
-            new AirportDef { Name = "NUQUI", IATA="NQU" }, 
-            new AirportDef { Name = "ORLANDO", IATA="ORL" }, 
-            new AirportDef { Name = "PANAMA", IATA="PNM" }, 
-            new AirportDef { Name = "PARIS", IATA="CDG" }, 
-            new AirportDef { Name = "PASTO", IATA="PSO" }, 
-            new AirportDef { Name = "PEREIRA", IATA="PEI" }, 
-            new AirportDef { Name = "POPAYAN", IATA="PPN" }, 
-            new AirportDef { Name = "PROVIDENCIA", IATA="PVA" }, 
-            new AirportDef { Name = "PUERTO ASIS", IATA="PUU" }, 
-            new AirportDef { Name = "PUERTO CARRENO", IATA="PCR" }, 
-            new AirportDef { Name = "PUERTO INIRIDA", IATA="PDA" }, 
-            new AirportDef { Name = "PUERTO LEGUIZAMO", IATA="LQM" }, 
-            new AirportDef { Name = "PUNTA CANA", IATA="PUJ" }, 
-            new AirportDef { Name = "QUIBDO", IATA="UIB" }, 
-            new AirportDef { Name = "QUITO", IATA="UIO" }, 
-            new AirportDef { Name = "REMEDIOS", IATA="OTU" }, 
-            new AirportDef { Name = "RIOHACHA", IATA="RCH" }, 
-            new AirportDef { Name = "RIONEGRO - ANTIOQUIA", IATA="MDE" }, 
-            new AirportDef { Name = "SAN ANDRES - ISLA", IATA="ADZ" }, 
-            new AirportDef { Name = "SAN JOSE", IATA="SJE" }, 
-            new AirportDef { Name = "SAN SALVADOR", IATA="SAL" }, 
-            new AirportDef { Name = "SAN VICENTE DEL CAGUAN", IATA="SVI" }, 
-            new AirportDef { Name = "SANTA MARTA", IATA="SMR" }, 
-            new AirportDef { Name = "SANTIAGO", IATA="SLC" }, 
-            new AirportDef { Name = "SANTO DOMINGO", IATA="SDQ" }, 
-            new AirportDef { Name = "SAO PAULO", IATA="GRU" }, 
-            new AirportDef { Name = "SARAVENA", IATA="RVE" }, 
-            new AirportDef { Name = "TAME", IATA="TME" }, 
-            new AirportDef { Name = "TARAPACA", IATA="TCD" }, 
-            new AirportDef { Name = "TORONTO", IATA="YYZ" }, 
-            new AirportDef { Name = "TUMACO", IATA="TCO" }, 
-            new AirportDef { Name = "URIBIA", IATA="000" }, // No IATA CODE?!
-            new AirportDef { Name = "VALENCIA", IATA="VLN" }, 
-            new AirportDef { Name = "VALLEDUPAR", IATA="VUP" }, 
-            new AirportDef { Name = "VILLAVICENCIO", IATA="VVC" }, 
-            new AirportDef { Name = "WASHINGTON", IATA="IAD" }, 
-            new AirportDef { Name = "FRANKFURT", IATA="FRA" }, 
-            new AirportDef { Name = "TOLU", IATA="TLU" }, 
-            new AirportDef { Name = "RIO DE JANEIRO", IATA="GIG" }, 
-            new AirportDef { Name = "LA PAZ", IATA="LPB" }, 
-            new AirportDef { Name = "SAN VICENTE DEL CAGU", IATA="SVI" }, 
-            new AirportDef { Name = "VILLA GARZON", IATA="VGZ" }, 
-            new AirportDef { Name = "LA PEDRERA", IATA="LPD" }, 
-            new AirportDef { Name = "ACANDI", IATA="ACD" }, 
-            new AirportDef { Name = "SURAMERICA", IATA="UIO" }, 
-            new AirportDef { Name = "LONDRES", IATA="LHR" }, 
-            new AirportDef { Name = "LISBOA", IATA="LIS" }, 
-            new AirportDef { Name = "PITALITO", IATA="PTX" }, 
-            new AirportDef { Name = "PAITILLA MARCO", IATA="PAC" }, 
-            new AirportDef { Name = "BALBOA", IATA="BLB" }, 
-            new AirportDef { Name = "FORTALEZA", IATA="FOR" }, 
-            new AirportDef { Name = "MONTELIBANO", IATA="MTB" }, 
-            new AirportDef { Name = "BUENAVENTURA", IATA="BUN" }, 
-            new AirportDef { Name = "CAUCASIA", IATA="CAQ" }, 
-            new AirportDef { Name = "EL BAGRE", IATA="EBG" }, 
-            new AirportDef { Name = "CONDOTO", IATA="COG" }, 
-            new AirportDef { Name = "BRASILIA", IATA="BSB" }, 
-            new AirportDef { Name = "SAN JOSE DEL GUAVIAR", IATA="SJE" }, 
-            new AirportDef { Name = "SAN PEDRO SULA", IATA="SAP" }, 
-            new AirportDef { Name = "LA CHORRERA", IATA="LCR" }, 
-            new AirportDef { Name = "CAPURGANA", IATA="CPB" }, 
-            new AirportDef { Name = "SAN JUAN", IATA="SJU" }, 
-            new AirportDef { Name = "TACHINA", IATA="ESM" }, 
-            new AirportDef { Name = "DALAS", IATA="DFW" },
-            new AirportDef { Name = "LA MACARENA", IATA = "LMC"},
-            new AirportDef {Name = "LOS ANGELES", IATA = "LAX"},
-            new AirportDef {Name = "BRIDGENTOWN", IATA = "BGI"},
-            new AirportDef {Name = "CUZCO", IATA = "CUZ"},
-            new AirportDef {Name = "TIBU", IATA = "TIB"}            
+            new AirportDef { Name = "ALDANA", IATA="IPI", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "ARARACUARA", IATA="AQA", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "ARAUCA - MUNICIPIO", IATA="AUC", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "ARMENIA", IATA="AXM", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "ARUBA", IATA="AUA", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "ATLANTA", IATA="ATL", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "BAHIA SOLANO", IATA="BSC", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "BARCELONA", IATA="BCN", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "BARRANCABERMEJA", IATA="EJA", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "BARRANQUILLA", IATA="BAQ", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "BOGOTA", IATA="BOG", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "BUCARAMANGA", IATA="BGA", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "BUENOS AIRES", IATA="EZE", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "CALI", IATA="CLO", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "CANCUN", IATA="CUN", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "CARACAS", IATA="CCS", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "CAREPA", IATA="APO", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "CARTAGENA", IATA="CTG", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "COROZAL", IATA="CZU", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "CUCUTA", IATA="CUC", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "CURACAO", IATA="CUR", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "EL YOPAL", IATA="EYP", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "ESMERALDAS", IATA="ESM", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "FLORENCIA", IATA="FLA", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "FORT LAUDERDALE", IATA="FLL", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "GUAPI", IATA="GPI", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "GUATEMALA", IATA="GUA" , ICAO="", UseICAO=false}, 
+            new AirportDef { Name = "GUAYAQUIL", IATA="GYE", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "HABANA", IATA="HAV", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "HOUSTON", IATA="HOU", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "IBAGUE", IATA="IBE", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "LETICIA", IATA="LET", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "LIMA", IATA="LIM", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "MADRID", IATA="MAD", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "MAICAO", IATA="MCJ" , ICAO="", UseICAO=false}, 
+            new AirportDef { Name = "MANIZALES", IATA="MZL", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "MEDELLIN", IATA="EOH", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "MEXICO", IATA="MEX", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "MIAMI", IATA="MIA", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "MITU", IATA="MVP", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "MONTERIA", IATA="MTR", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "NEIVA", IATA="NVA", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "NEW YORK", IATA="JFK", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "NUQUI", IATA="NQU", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "ORLANDO", IATA="ORL", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "PANAMA", IATA="PNM", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "PARIS", IATA="CDG", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "PASTO", IATA="PSO", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "PEREIRA", IATA="PEI", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "POPAYAN", IATA="PPN", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "PROVIDENCIA", IATA="PVA", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "PUERTO ASIS", IATA="PUU", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "PUERTO CARRENO", IATA="PCR", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "PUERTO INIRIDA", IATA="PDA", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "PUERTO LEGUIZAMO", IATA="LQM", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "PUNTA CANA", IATA="PUJ", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "QUIBDO", IATA="UIB", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "QUITO", IATA="UIO", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "REMEDIOS", IATA="OTU", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "RIOHACHA", IATA="RCH", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "RIONEGRO - ANTIOQUIA", IATA="MDE", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "SAN ANDRES - ISLA", IATA="ADZ", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "SAN JOSE", IATA="SJE", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "SAN SALVADOR", IATA="SAL", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "SAN VICENTE DEL CAGUAN", IATA="SVI", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "SANTA MARTA", IATA="SMR", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "SANTIAGO", IATA="SLC", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "SANTO DOMINGO", IATA="SDQ", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "SAO PAULO", IATA="GRU", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "SARAVENA", IATA="RVE", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "TAME", IATA="TME", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "TARAPACA", IATA="TCD", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "TORONTO", IATA="YYZ", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "TUMACO", IATA="TCO", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "URIBIA", IATA="000", ICAO="SKPB", UseICAO=true }, // No IATA CODE?!
+            new AirportDef { Name = "VALENCIA", IATA="VLN", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "VALLEDUPAR", IATA="VUP", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "VILLAVICENCIO", IATA="VVC", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "WASHINGTON", IATA="IAD", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "FRANKFURT", IATA="FRA", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "TOLU", IATA="TLU", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "RIO DE JANEIRO", IATA="GIG", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "LA PAZ", IATA="LPB", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "SAN VICENTE DEL CAGU", IATA="SVI", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "VILLA GARZON", IATA="VGZ", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "LA PEDRERA", IATA="LPD", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "ACANDI", IATA="ACD", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "SURAMERICA", IATA="UIO", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "LONDRES", IATA="LHR", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "LISBOA", IATA="LIS", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "PITALITO", IATA="PTX", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "PAITILLA MARCO", IATA="PAC", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "BALBOA", IATA="BLB", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "FORTALEZA", IATA="FOR", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "MONTELIBANO", IATA="MTB", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "BUENAVENTURA", IATA="BUN", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "CAUCASIA", IATA="CAQ", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "EL BAGRE", IATA="EBG", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "CONDOTO", IATA="COG", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "BRASILIA", IATA="BSB", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "SAN JOSE DEL GUAVIAR", IATA="SJE", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "SAN PEDRO SULA", IATA="SAP", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "LA CHORRERA", IATA="LCR", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "CAPURGANA", IATA="CPB", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "SAN JUAN", IATA="SJU", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "TACHINA", IATA="ESM", ICAO="", UseICAO=false }, 
+            new AirportDef { Name = "DALAS", IATA="DFW", ICAO="", UseICAO=false },
+            new AirportDef { Name = "LA MACARENA", IATA = "LMC", ICAO="", UseICAO=false},
+            new AirportDef {Name = "LOS ANGELES", IATA = "LAX", ICAO="", UseICAO=false},
+            new AirportDef {Name = "BRIDGENTOWN", IATA = "BGI", ICAO="", UseICAO=false},
+            new AirportDef {Name = "CUZCO", IATA = "CUZ", ICAO="", UseICAO=false},
+            new AirportDef {Name = "TIBU", IATA = "TIB", ICAO="", UseICAO=false}            
          }; 
 
 
@@ -398,55 +405,15 @@ namespace CI_FLights2014
                         // IATA CODES VOOR Airport en Airlines
                         var item = _Airports.Find(q => q.Name == Route_SRC_FullName);
                         string TEMP_FromIATA = item.IATA;
+                        string TEMP_FromICAO = item.ICAO;
+                        Boolean TEMP_FromUseICAO = item.UseICAO;
                         var item2 = _Airports.Find(q => q.Name == Route_DST_FullName);
                         string TEMP_ToIATA = item2.IATA;
+                        string TEMP_ToICAO = item.ICAO;
+                        Boolean TEMP_ToUseICAO = item.UseICAO;
                         var item3 = _Airlines.Find(q => q.Name == Airline_Name);
                         string TEMP_Airline = item3.IATA;
-
-
-                        //Console.WriteLine("{0} - {1} - {2} - {3} - {4} - {5} - {6} - {7} - {8} - {9} - {10} - {11} - {12} - {13} - {14} - {15}", new object[]
-                        //{
-                        //    Airline_Name,
-                        //    Route_Einde,
-                        //    Airline_FlightNumber,
-                        //    Route_SRC_FullName,
-                        //    Route_DST_FullName,
-                        //    Route_Depart_Time,
-                        //    Route_Arrival_Time,
-                        //    Route_Equipment,
-                        //    Route_Seat_Number,
-                        //    Route_Day_Monday_Bit,
-                        //    Route_Day_Thuesday_Bit,
-                        //    Route_Day_Wednesday_Bit,
-                        //    Route_Day_Thursday_Bit,
-                        //    Route_Day_Friday_Bit,
-                        //    Route_Day_Saterday_Bit,
-                        //    Route_Day_Sunday_Bit
-                        //});
-
-                        //using (StreamWriter sw = File.AppendText("raw-output.txt"))
-                        //{
-                        //    sw.WriteLine("{0} - {1} - {2} - {3} - {4} - {5} - {6} - {7} - {8} - {9} - {10} - {11} - {12} - {13} - {14} - {15}", new object[]
-                        //    {
-                        //        Airline_Name,
-                        //        Route_Einde,
-                        //        Airline_FlightNumber,
-                        //        Route_SRC_FullName,
-                        //        Route_DST_FullName,
-                        //        Route_Depart_Time,
-                        //        Route_Arrival_Time,
-                        //        Route_Equipment,
-                        //        Route_Seat_Number,
-                        //        Route_Day_Monday_Bit,
-                        //        Route_Day_Thuesday_Bit,
-                        //        Route_Day_Wednesday_Bit,
-                        //        Route_Day_Thursday_Bit,
-                        //        Route_Day_Friday_Bit,
-                        //        Route_Day_Saterday_Bit,
-                        //        Route_Day_Sunday_Bit
-                        //    });
-                        //}
-
+                                                
                         bool alreadyExists = CIFLights.Exists(x => x.FromIATA == TEMP_FromIATA 
                                 && x.ToIATA == TEMP_ToIATA
                                 && x.ToDate == Route_Einde                                
@@ -471,7 +438,11 @@ namespace CI_FLights2014
                                 CIFLights.Add(new CIFLight
                                 {
                                     FromIATA = TEMP_FromIATA,
+                                    FromICAO = TEMP_FromICAO,
+                                    FromUseICAO = TEMP_FromUseICAO,
                                     ToIATA = TEMP_ToIATA,
+                                    ToICAO = TEMP_ToICAO,
+                                    ToUseICAO = TEMP_ToUseICAO,
                                     FromDate = Route_Start,
                                     ToDate = Route_Einde,
                                     ArrivalTime = DateTime.Parse(Route_Arrival_Time),
@@ -615,17 +586,15 @@ namespace CI_FLights2014
 
                                 for (int i = 0; i < agencyairportsiata.Count; i++) // Loop through List with for)
                                 {
-
-
                                     //int result1 = IATAAirports.FindIndex(T => T.stop_id == 9458)
-                                    var airportinfo = IATAAirports.Find(q => q.stop_id == agencyairportsiata[i]);
-                                    csvstops.WriteField(airportinfo.stop_id);
+                                    var airportinfo = IATAAirports.Find(q => q.stop_iata == agencyairportsiata[i]);
+                                    csvstops.WriteField(airportinfo.stop_iata);
                                     csvstops.WriteField(airportinfo.stop_name);
-                                    csvstops.WriteField(airportinfo.stop_desc);
+                                    csvstops.WriteField(airportinfo.stop_city + " - " + airportinfo.stop_country);
                                     csvstops.WriteField(airportinfo.stop_lat);
                                     csvstops.WriteField(airportinfo.stop_lon);
-                                    csvstops.WriteField(airportinfo.zone_id);
-                                    csvstops.WriteField(airportinfo.stop_url);
+                                    csvstops.WriteField("");
+                                    csvstops.WriteField("");
                                     csvstops.NextRecord();
                                 }
                             }
@@ -723,8 +692,8 @@ namespace CI_FLights2014
 
                                         //var item4 = _Airlines.Find(q => q.Name == flight.FlightAirline);
                                         //string TEMP_IATA = item4.IATA;
-                                        var FromAirportInfo = IATAAirports.Find(q => q.stop_id == flight.FromIATA);
-                                        var ToAirportInfo = IATAAirports.Find(q => q.stop_id == flight.ToIATA);
+                                        var FromAirportInfo = IATAAirports.Find(q => q.stop_iata == flight.FromIATA);
+                                        var ToAirportInfo = IATAAirports.Find(q => q.stop_iata == flight.ToIATA);
 
                                         csvtrips.WriteField(flight.FromIATA + flight.ToIATA);
                                         csvtrips.WriteField(flight.FromIATA + flight.ToIATA + flight.FlightAirline + flight.FlightNumber.Replace(" ", "") + String.Format("{0:yyyyMMdd}", flight.FromDate) + String.Format("{0:yyyyMMdd}", flight.ToDate) + Convert.ToInt32(flight.FlightMonday) + Convert.ToInt32(flight.FlightTuesday) + Convert.ToInt32(flight.FlightWednesday) + Convert.ToInt32(flight.FlightThursday) + Convert.ToInt32(flight.FlightFriday) + Convert.ToInt32(flight.FlightSaterday) + Convert.ToInt32(flight.FlightSunday));
@@ -868,10 +837,14 @@ namespace CI_FLights2014
                             //string TEMP_Url = item4.WebsiteUrl;
                             //string TEMP_IATA = item4.IATA;
 
+                            var FromAirportInfo = IATAAirports.Find(q => q.stop_iata == routes[i].FromIATA);
+                            var ToAirportInfo = IATAAirports.Find(q => q.stop_iata == routes[i].ToIATA);
+
+
                             csvroutes.WriteField(routes[i].FromIATA + routes[i].ToIATA + routes[i].FlightAirline);
                             csvroutes.WriteField(routes[i].FlightAirline);
                             csvroutes.WriteField(routes[i].FromIATA + routes[i].ToIATA + routes[i].FlightAirline);
-                            csvroutes.WriteField(routes[i].FromIATA + " - " + routes[i].ToIATA + " - " + routes[i].FlightAirline);
+                            csvroutes.WriteField(FromAirportInfo.stop_city + " - " + ToAirportInfo.stop_city);
                             csvroutes.WriteField(""); // routes[i].FlightAircraft + ";" + CIFLights[i].FlightAirline + ";" + CIFLights[i].FlightOperator + ";" + CIFLights[i].FlightCodeShare
                             csvroutes.WriteField(1102);
                             csvroutes.WriteField("");
@@ -910,14 +883,14 @@ namespace CI_FLights2014
 
 
                             //int result1 = IATAAirports.FindIndex(T => T.stop_id == 9458)
-                            var airportinfo = IATAAirports.Find(q => q.stop_id == agencyairportsiata[i]);
-                            csvstops.WriteField(airportinfo.stop_id);
+                            var airportinfo = IATAAirports.Find(q => q.stop_iata == agencyairportsiata[i]);
+                            csvstops.WriteField(airportinfo.stop_iata);
                             csvstops.WriteField(airportinfo.stop_name);
-                            csvstops.WriteField(airportinfo.stop_desc);
+                            csvstops.WriteField(airportinfo.stop_city + " - " + airportinfo.stop_country);
                             csvstops.WriteField(airportinfo.stop_lat);
                             csvstops.WriteField(airportinfo.stop_lon);
-                            csvstops.WriteField(airportinfo.zone_id);
-                            csvstops.WriteField(airportinfo.stop_url);
+                            csvstops.WriteField("");
+                            csvstops.WriteField("");
                             csvstops.NextRecord();
                         }
                     }                
