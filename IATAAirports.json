@@ -12900,6 +12900,16 @@
    "stop_timezone": "America/Bogota"
  },
  {
+   "stop_name": "La Chorrera Airport",
+   "stop_city": "La Chorrera",
+   "stop_country": "Colombia",
+   "stop_iata": "LCR",
+   "stop_icao": "",
+   "stop_lat": -1.457889,
+   "stop_lon":  -72.802319,
+   "stop_timezone": "America/Bogota"
+ },
+ {
    "stop_name": "Apartadó Airport",
    "stop_city": "Apartadó",
    "stop_country": "Colombia",
