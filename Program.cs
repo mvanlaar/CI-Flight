@@ -433,7 +433,8 @@ namespace CI_FLights2014
                         }
                         else
                         {
-                            if (TEMP_Airline != "AV") {
+                            if ((TEMP_Airline == "EF") || (TEMP_Airline == "DA") || (TEMP_Airline == "P5") || (TEMP_Airline == "4C") || (TEMP_Airline == "5Z") || (TEMP_Airline == "LR") || (TEMP_Airline == "9R"))
+                            {
                                 // Not Avianca, we got a better source for Avianca.
                                 CIFLights.Add(new CIFLight
                                 {
@@ -999,9 +1000,9 @@ namespace CI_FLights2014
                                     csvstoptimes.WriteField(CIFLights[i].FromIATA + CIFLights[i].ToIATA + CIFLights[i].FlightAirline + CIFLights[i].FlightNumber.Replace(" ", "") + String.Format("{0:yyyyMMdd}", CIFLights[i].FromDate) + String.Format("{0:yyyyMMdd}", CIFLights[i].ToDate) + Convert.ToInt32(CIFLights[i].FlightMonday) + Convert.ToInt32(CIFLights[i].FlightTuesday) + Convert.ToInt32(CIFLights[i].FlightWednesday) + Convert.ToInt32(CIFLights[i].FlightThursday) + Convert.ToInt32(CIFLights[i].FlightFriday) + Convert.ToInt32(CIFLights[i].FlightSaterday) + Convert.ToInt32(CIFLights[i].FlightSunday));
                                     csvstoptimes.WriteField(String.Format("{0:HH:mm:ss}", CIFLights[i].DepartTime));
                                     csvstoptimes.WriteField(String.Format("{0:HH:mm:ss}", CIFLights[i].DepartTime));
-                                    csvstoptimes.WriteField(FromAirportInfo.stop_city);
+                                    csvstoptimes.WriteField(CIFLights[i].FromIATA);
                                     csvstoptimes.WriteField("0");
-                                    csvstoptimes.WriteField("");
+                                    csvstoptimes.WriteField(ToAirportInfo.stop_city);
                                     csvstoptimes.WriteField("0");
                                     csvstoptimes.WriteField("0");
                                     csvstoptimes.WriteField("");
@@ -1014,7 +1015,7 @@ namespace CI_FLights2014
                                         csvstoptimes.WriteField(CIFLights[i].FromIATA + CIFLights[i].ToIATA + CIFLights[i].FlightAirline + CIFLights[i].FlightNumber.Replace(" ", "") + String.Format("{0:yyyyMMdd}", CIFLights[i].FromDate) + String.Format("{0:yyyyMMdd}", CIFLights[i].ToDate) + Convert.ToInt32(CIFLights[i].FlightMonday) + Convert.ToInt32(CIFLights[i].FlightTuesday) + Convert.ToInt32(CIFLights[i].FlightWednesday) + Convert.ToInt32(CIFLights[i].FlightThursday) + Convert.ToInt32(CIFLights[i].FlightFriday) + Convert.ToInt32(CIFLights[i].FlightSaterday) + Convert.ToInt32(CIFLights[i].FlightSunday));
                                         csvstoptimes.WriteField(String.Format("{0:HH:mm:ss}", CIFLights[i].ArrivalTime));
                                         csvstoptimes.WriteField(String.Format("{0:HH:mm:ss}", CIFLights[i].ArrivalTime));
-                                        csvstoptimes.WriteField(ToAirportInfo.stop_city);
+                                        csvstoptimes.WriteField(CIFLights[i].ToIATA);
                                         csvstoptimes.WriteField("2");
                                         csvstoptimes.WriteField("");
                                         csvstoptimes.WriteField("0");
@@ -1034,7 +1035,7 @@ namespace CI_FLights2014
                                         csvstoptimes.WriteField(CIFLights[i].FromIATA + CIFLights[i].ToIATA + CIFLights[i].FlightAirline + CIFLights[i].FlightNumber.Replace(" ", "") + String.Format("{0:yyyyMMdd}", CIFLights[i].FromDate) + String.Format("{0:yyyyMMdd}", CIFLights[i].ToDate) + Convert.ToInt32(CIFLights[i].FlightMonday) + Convert.ToInt32(CIFLights[i].FlightTuesday) + Convert.ToInt32(CIFLights[i].FlightWednesday) + Convert.ToInt32(CIFLights[i].FlightThursday) + Convert.ToInt32(CIFLights[i].FlightFriday) + Convert.ToInt32(CIFLights[i].FlightSaterday) + Convert.ToInt32(CIFLights[i].FlightSunday));
                                         csvstoptimes.WriteField(hour + ":" + strminute + ":00");
                                         csvstoptimes.WriteField(hour + ":" + strminute + ":00");
-                                        csvstoptimes.WriteField(ToAirportInfo.stop_city);
+                                        csvstoptimes.WriteField(CIFLights[i].ToIATA);
                                         csvstoptimes.WriteField("2");
                                         csvstoptimes.WriteField("");
                                         csvstoptimes.WriteField("0");
