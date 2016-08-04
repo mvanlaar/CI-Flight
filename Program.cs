@@ -466,8 +466,9 @@ namespace CI_FLights2014
                         }
                         else
                         {
-                            if (TEMP_Airline != "AV") {
-                                // Not Avianca, we got a better source for Avianca.
+                            if ((TEMP_Airline != "AV") || (TEMP_Airline != "CM") || (TEMP_Airline != "2K") || (TEMP_Airline != "O6") || (TEMP_Airline != "LR") || (TEMP_Airline != "P5")){
+                                // Not Avianca (AV, 2K, O6, LR), we got a better source for Avianca.
+                                // Not CopaAirlines (CM, P5), we got a better source for Copa Airlines.
                                 CIFLights.Add(new CIFLight
                                 {
                                     FromIATA = TEMP_FromIATA,
