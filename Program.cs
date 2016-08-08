@@ -236,9 +236,9 @@ namespace CI_FLights2014
             new AirportDef {Name = "BRIDGENTOWN", IATA = "BGI", ICAO="", UseICAO=false},
             new AirportDef {Name = "CUZCO", IATA = "CUZ", ICAO="", UseICAO=false},
             new AirportDef {Name = "TIBU", IATA = "TIB", ICAO="", UseICAO=false}            
-         }; 
-
-
+         };
+        
+        public static readonly List<string> _AirlinesNotWanted = new List<string>() { "AV", "CM", "2K", "O6", "LR", "P5", "JJ", "IB", "AA", "LA", "BA" };
 
         private static void Main(string[] args)
         {
@@ -402,7 +402,7 @@ namespace CI_FLights2014
                             Route_Day_Sunday_Bit = false;
                         } 
 
-                        // IATA CODES VOOR Airport en Airlines
+                        // IATA CODES for Airport en Airlines
                         var item = _Airports.Find(q => q.Name == Route_SRC_FullName);
                         string TEMP_FromIATA = item.IATA;
                         string TEMP_FromICAO = item.ICAO;
@@ -433,8 +433,10 @@ namespace CI_FLights2014
                         }
                         else
                         {
-                            if (TEMP_Airline != "AV") {
-                                // Not Avianca, we got a better source for Avianca.
+                            if (!_AirlinesNotWanted.Contains(TEMP_Airline, StringComparer.OrdinalIgnoreCase))
+                            {                                
+                                // Not Avianca (AV, 2K, O6, LR), we got a better source for Avianca.
+                                // Not CopaAirlines (CM, P5), we got a better source for Copa Airlines.
                                 CIFLights.Add(new CIFLight
                                 {
                                     FromIATA = TEMP_FromIATA,
