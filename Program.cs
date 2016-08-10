@@ -238,7 +238,7 @@ namespace CI_FLights2014
             new AirportDef {Name = "TIBU", IATA = "TIB", ICAO="", UseICAO=false}            
          };
         
-        public static readonly List<string> _AirlinesNotWanted = new List<string>() { "AV", "CM", "2K", "O6", "LR", "P5", "JJ", "IB", "AA", "LA", "BA" };
+        public static readonly List<string> _AirlinesWanted = new List<string>() { "DA", "EF", "9R" };
 
         private static void Main(string[] args)
         {
@@ -433,7 +433,7 @@ namespace CI_FLights2014
                         }
                         else
                         {
-                            if (!_AirlinesNotWanted.Contains(TEMP_Airline, StringComparer.OrdinalIgnoreCase))
+                            if (_AirlinesWanted.Contains(TEMP_Airline, StringComparer.OrdinalIgnoreCase))
                             {                                
                                 // Not Avianca (AV, 2K, O6, LR), we got a better source for Avianca.
                                 // Not CopaAirlines (CM, P5), we got a better source for Copa Airlines.
